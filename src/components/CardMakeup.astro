@@ -1,0 +1,50 @@
+---
+interface Props {
+    id: string
+    name: string
+    price: number
+    img: string
+    description: string
+    status: string
+}
+
+const { description, price, img, id, name, status } = Astro.props
+
+
+---
+
+<a 
+href={`/makeups/${id}`}
+class="rounded-lg border shadow-md bg-stone-50 border-stone-200
+hover:scale-105 hover:bg-stone-200 hover:border-stone-300 transition flez
+flex-col"
+>
+    <picture class="flex justify-center p-4">
+        <img width="200" height="200" class="rounded-lg" src={img} alt={`${name} ${id}`} />
+    </picture>
+
+    <header class="p-4 flex-grow">
+    
+        <h2 class="my-1 text-xl font-semibold tracking-tight text-zinc-800">
+            {name}
+        </h2>
+        <p class="my-1 text-1xl font-normal tracking-tight text-stone-700">${price.toFixed(3)}</p>
+
+        <p class="font-extralight text-gray-500 text-sm">
+            {description?.length > 110 ? description.slice(0, 110) + '...' : description}
+        </p>
+        <div class="mt-1">
+            <span
+            class:list={[" text-xs font-semibold px-2 py-0.5 rounded",
+                {
+                    "bg-green-400 text-green-900": status === 'Disponible',
+                    "bg-red-400 text-red-900": status === 'Agotado'
+                }
+        
+            ]}
+            >{status}</span
+            >
+        </div>
+    </header>
+
+</a>

@@ -1,0 +1,21 @@
+---
+import { getMakeups } from '../services/makeups'
+import CardMakeup from "./CardMakeup.astro";
+
+const makeups = await getMakeups()
+---
+
+<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {
+        makeups.map((makeup) => (
+            <CardMakeup 
+                id={makeup.id}
+                name={makeup.name}
+                img={makeup.image}
+                price={makeup.price}
+                description={makeup.description}
+                status={makeup.status}
+            />
+        ))
+    }
+</div>

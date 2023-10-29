@@ -1,0 +1,58 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getMakeupBy } from "../../services/makeups";
+import Makeups from "../../components/Makeups.astro"
+import { Contador } from "../../components/Contador"
+
+const { id }  = Astro.params
+
+let makeup
+
+if(id) {
+    makeup = await getMakeupBy({id})
+}
+---
+
+<Layout title={`Makeup ${id}`}>
+
+    <div class="container pt-4">
+        <nav>
+            <ol role="list" class="flex items-center gap-1 text-sm text-gray-600">
+                <li>
+                    <a href="/" class="block text-gray-900 transition hover:text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="28" height="28" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M15 6l-6 6l6 6"></path>
+                         </svg>
+                    </a>
+                    
+                </li>
+                <li class="text-gray-700 text-base text-center font-bold">Volver</li>
+            </ol>
+        </nav>
+
+    </div>
+
+    <section class="container">
+        <div class="pb-16 pt-5 lg:grid lg:grid-cols-3 lg:gap-5">
+            <div class="lg:col-span-2">
+                <div class="md:order-2 md:col-span-1">
+                    <img class="w-52 h-auto" src={makeup?.image} alt={makeup?.name}/>
+                </div>
+            </div>
+            <div class="mt-8 lg:mt-8">
+                <h2 class="text-3xl text-zinc-800 font-bold">{makeup?.name}</h2>
+                <p class="mt-1 text-2xl font-bold tracking-tight text-green-800"><span>${makeup?.price.toFixed(3)}</span></p>
+                <div class="mt-3">
+                    <p class="font-extralight text-gray-600 text-sm">{makeup?.description}</p>
+
+                </div>
+                <div class="mt-6">
+                    <button class="text-center text-sm w-40 py-3 rounded-md font-normal bg-zinc-600 tracking-wide text-white">Agregar a la bolsa</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <h2 class="text-4xl font-bold my-10 text-center">Productos relacionados</h2>
+    <Makeups/>
+</Layout>
