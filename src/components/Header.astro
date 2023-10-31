@@ -1,24 +1,33 @@
 ---
+import SideBar from "../components/SideBag"
 
 ---
-
-
 
 <header class="bg-stone-50 p-4 flex justify-between items-center border-b">
     <nav class="flex items-center w-full">
       <div class="text-center flex-1">
         <a href="/">
-          <h2 class="text-zinc-800 text-4xl font-bold" >Makeup Store</h2>
+          <h2 class="text-zinc-800 text-4xl font-bold" id="main-title">Makeup Store</h2>
         </a>
-        <span class="text-zinc-500 text-sm">Tu tienda de maquillaje de confianza.</span>
+        <span class="text-zinc-500 text-sm" id="subtitle">Tu tienda de maquillaje de confianza.</span>
       </div>
-      <button class="rounded"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-bag" width="30" height="30" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"></path>
-        <path d="M9 11v-5a3 3 0 0 1 6 0v5"></path>
-     </svg></button>
+     <div>
+        <SideBar client:load/>
+     </div>
     </nav>
 </header>
+
+<style>
+  @media (max-width: 400px) {
+  #main-title {
+    font-size: 1.7rem; /* Cambia el tamaño del título para pantallas de hasta 375px de ancho */
+  }
+  
+  #subtitle {
+    font-size: 8px; /* Cambia el tamaño del subtítulo para pantallas de hasta 375px de ancho */
+  }
+}
+</style>
 
   
   

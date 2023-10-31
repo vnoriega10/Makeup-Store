@@ -3,6 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { getMakeupBy } from "../../services/makeups";
 import Makeups from "../../components/Makeups.astro"
 import { Contador } from "../../components/Contador"
+import ButtonAddBag from "../../components/ButtonAddBag.astro";
 
 const { id }  = Astro.params
 
@@ -27,7 +28,7 @@ if(id) {
                     </a>
                     
                 </li>
-                <li class="text-gray-700 text-base text-center font-bold">Volver</li>
+                <li class="text-gray-700 text-base text-center font-bold tracking-wider">Volver</li>
             </ol>
         </nav>
 
@@ -47,9 +48,7 @@ if(id) {
                     <p class="font-extralight text-gray-600 text-sm">{makeup?.description}</p>
 
                 </div>
-                <div class="mt-6">
-                    <button class="text-center text-sm w-40 py-3 rounded-md font-normal bg-zinc-600 tracking-wide text-white">Agregar a la bolsa</button>
-                </div>
+                <ButtonAddBag/>
             </div>
         </div>
     </section>
