@@ -4,8 +4,8 @@ import SideBar from "../components/SideBag"
 ---
 
 <header class="bg-stone-50 p-4 flex justify-between items-center border-b">
-    <nav class="flex items-center w-full">
-      <div class="text-center flex-1">
+    <nav id="nav-header" class="flex items-center w-full">
+      <div   class="text-center flex-1">
         <a href="/">
           <h2 class="text-zinc-800 text-4xl font-bold" id="main-title">Makeup Store</h2>
         </a>
@@ -19,7 +19,13 @@ import SideBar from "../components/SideBag"
 
 <style>
   @media (max-width: 400px) {
+
+  #nav-header{
+    margin-left: 20px;
+  }
+
   #main-title {
+    
     font-size: 1.7rem; /* Cambia el tamaño del título para pantallas de hasta 375px de ancho */
   }
   
