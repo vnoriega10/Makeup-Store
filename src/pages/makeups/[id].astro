@@ -2,8 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import { getMakeupBy } from "../../services/makeups";
 import Makeups from "../../components/Makeups.astro"
-import { Contador } from "../../components/Contador"
-import ButtonAddBag from "../../components/ButtonAddBag.astro";
+import AddToBagForm from "../../components/AddToBagForm";
 
 const { id }  = Astro.params
 
@@ -12,6 +11,7 @@ let makeup
 if(id) {
     makeup = await getMakeupBy({id})
 }
+
 ---
 
 <Layout title={`Makeup ${id}`}>
@@ -46,12 +46,17 @@ if(id) {
                 <p class="mt-1 text-2xl font-bold tracking-tight text-green-800"><span>${makeup?.price.toFixed(3)}</span></p>
                 <div class="mt-3">
                     <p class="font-extralight text-gray-600 text-sm">{makeup?.description}</p>
-
                 </div>
-                <ButtonAddBag/>
+                <AddToBagForm id={id} client:load>
+                    <div class="mt-6">
+                        <button id="miBoton" class="text-center text-sm w-40 py-3 rounded-md font-normal bg-zinc-600 tracking-wide text-white">Agregar a la bolsa</button>
+                    </div>
+                </AddToBagForm>
             </div>
         </div>
     </section>
     <h2 class="text-4xl font-bold my-10 text-center">Productos relacionados</h2>
     <Makeups/>
+    
 </Layout>
+

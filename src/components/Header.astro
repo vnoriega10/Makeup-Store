@@ -5,14 +5,14 @@ import SideBar from "../components/SideBag"
 
 <header class="bg-stone-50 p-4 flex justify-between items-center border-b">
     <nav id="nav-header" class="flex items-center w-full">
-      <div   class="text-center flex-1">
-        <a href="/">
+      <div   class="text-center mx-auto">
+        <a href="/" class="">
           <h2 class="text-zinc-800 text-4xl font-bold" id="main-title">Makeup Store</h2>
         </a>
         <span class="text-zinc-500 text-sm" id="subtitle">Tu tienda de maquillaje de confianza.</span>
       </div>
      <div>
-        <SideBar client:load/>
+        <SideBar client:load transition:persist/>
      </div>
     </nav>
 </header>
