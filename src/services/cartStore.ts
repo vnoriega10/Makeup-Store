@@ -9,22 +9,14 @@ export type CartItemDisplayInfo = Pick<APIMakeup, 'id' | 'name' | 'price' | 'ima
 export const APIMakeups = map<Record<string, APIMakeup>>({});
 
 
-export function addCartItem ({id, name, price, image, quantity}) {
-    const existingEntry = APIMakeups.get()[id];
-    if(existingEntry){
-        APIMakeups.setKey(id, {
-            ...existingEntry,
-            quantity: existingEntry.quantity + quantity
-        });
-
-    } else {
-        APIMakeups.setKey(id, 
-            {
-                id, name, price, image, quantity: 1,
-                description: "",
-                status: ""
-            }
-        );
-    }
+export function addCartItem ({id, name, price, image}) {
+  
+    APIMakeups.setKey(id,{
+            id, name, price, image,
+            description: "",
+            status: ""
+        }
+    );
+    
 }
 

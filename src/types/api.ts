@@ -5,5 +5,4 @@ export type APIMakeup = {
     image:       string;
     description: string;
     status:      string;
-    quantity:   number;
 }

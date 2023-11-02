@@ -7,3 +7,9 @@
         }
         
     }
+
+
+.custom-success {
+    background-color: #060606; /* Cambia el color de fondo a verde */
+    color: #d01a1a; /* Cambia el color del texto a blanco */
+}
