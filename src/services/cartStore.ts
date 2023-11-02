@@ -11,12 +11,22 @@ export const APIMakeups = map<Record<string, APIMakeup>>({});
 
 export function addCartItem ({id, name, price, image}) {
   
-    APIMakeups.setKey(id,{
-            id, name, price, image,
-            description: "",
-            status: ""
-        }
-    );
+    const item = {
+        id,
+        name,
+        price,
+        image,
+        description: "",
+        status: "",
+    };
+    
+    // Guarda el producto en el almacenamiento local
+    const storedCartItems = localStorage.getItem('cartItems');
+    let cartItems = storedCartItems ? JSON.parse(storedCartItems) : {};
+    cartItems[id] = item;
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    
+    APIMakeups.setKey(id, item);
     
 }
 
