@@ -24,8 +24,11 @@ const SideBar = () => {
         delete updatedMakeups[id];
         APIMakeups.set(updatedMakeups);
 
+         // Actualiza el estado en AddToBagForm
+
         const productAddedKey = `product_${id}_added`;
-        localStorage.setItem(productAddedKey, "false");
+        delete localStorage[productAddedKey];
+        window.location.reload();
     }
 
     useEffect(() => {
@@ -53,7 +56,7 @@ const SideBar = () => {
             <div className={`${!open && "hidden"} bg-stone-300/50 min-h-screen w-full fixed top-0 right-0 backdrop-blur-sm`} onClick={() => setOpen(false)} >
             </div>
 
-            <div className={ `${open ? "w-[420px]" : "w-[1px]"} bg-white min-h-screen w-[420px] fixed top-0 right-0 transition-all duration-500 shadow`}>
+            <div className={ `${open ? "w-[420px]" : "w-[0.5px]"} bg-white min-h-screen w-[420px] fixed top-0 right-0 transition-all duration-500 shadow`}>
                     <div className={`${!open && "hidden"} flex items-center justify-between py-4 px-5 border-b`}>
 
                             <h3 className='text-2xl flex gap-4 items-center font-bold text-black'>Tu bolsa</h3>
