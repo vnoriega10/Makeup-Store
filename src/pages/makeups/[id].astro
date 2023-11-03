@@ -39,20 +39,20 @@ if(id) {
         <div class="pb-16 pt-5 lg:grid lg:grid-cols-3 lg:gap-5">
             <div class="lg:col-span-2">
                 <div class="md:order-2 md:col-span-1">
-                    <img class="w-52 h-auto" src={makeup?.image} alt={makeup?.name}/>
+                    <img class=" w-[300px] h-auto" src={makeup?.image} alt={makeup?.name}/>
                 </div>
             </div>
-            <div class="mt-8 lg:mt-8">
-                <h2 class="text-3xl text-zinc-800 font-bold">{makeup?.name}</h2>
-                <p class="mt-1 text-2xl font-bold tracking-tight text-green-800"><span>${makeup?.price.toFixed(3)}</span></p>
+            <div class="lg:mt-1">
+                <h2 class="text-3xl text-zinc-900 font-bold">{makeup?.name}</h2>
+                <p class="mt-1 text-2xl font-bold tracking-tight text-[#9c6550]"><span>${makeup?.price.toFixed(3)}</span></p>
                 <div class="mt-3">
-                    <p class="font-extralight text-gray-600 text-sm">{makeup?.description}</p>
+                    <p class="font-extralight text-gray-800 text-sm">{makeup?.description}</p>
                 </div>
-                <AddToBagForm id={id} client:load />
+                <AddToBagForm id={id} client:load>
             </div>
         </div>
     </section>
-    <h2 class="text-4xl font-bold my-10 text-center">Productos relacionados</h2>
+    <h2 class="text-4xl font-bold my-10 text-center text-black]">Productos relacionados</h2>
     <Makeups/>
     
 </Layout>

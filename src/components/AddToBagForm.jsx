@@ -15,8 +15,8 @@ export default function AddToBagForm({ id }) {
           setAddedToCart(true);
         }
     }, [id]);
-      
-    // También verifica si el producto ya está en el carrito del sidebar
+
+    
 
     async function addToBag(e){
         e.preventDefault();
@@ -40,7 +40,7 @@ export default function AddToBagForm({ id }) {
         <div>
             <form onSubmit={addToBag}>
                 <div className="mt-6">
-                    <button disabled={addedToCart} className={`text-center text-sm w-40 py-3 rounded-md font-normal tracking-wide text-white ${addedToCart ? 'bg-green-900/70' : 'bg-green-900 hover:scale-105 hover:bg-green-700 transition'}`}
+                    <button disabled={addedToCart} className={`text-center text-sm w-40 py-3 rounded-md font-normal tracking-wide text-white ${addedToCart ? 'bg-[#9c6550]/80' : 'bg-[#9c6550] hover:scale-105 hover:bg-[#b17863] transition'}`}
                     >Agregar a la bolsa</button>
                     {addedToCart && <p className="text-xs py-2 px-1 text-red-600">El producto ya existe en la bolsa</p>}
                 </div>

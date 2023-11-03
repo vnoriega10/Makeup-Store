@@ -15,8 +15,8 @@ const { description, price, img, id, name, status } = Astro.props
 
 <a 
 href={`/makeups/${id}`}
-class="rounded-lg border shadow-md bg-stone-50 border-stone-200
-hover:scale-105 hover:bg-stone-200 hover:border-stone-300 transition flex
+class="rounded-lg border shadow-lg bg-white border-zinc-300/95
+hover:scale-105 hover:bg-stone-100 hover:border-zinc-300 transition flex
 flex-col"
 >
     <picture class="flex justify-center p-4">
@@ -25,12 +25,12 @@ flex-col"
 
     <header class="p-4 flex-grow">
     
-        <h2 class="my-1 text-xl font-semibold tracking-tight text-zinc-800">
+        <h2 class="my-1 text-xl font-semibold tracking-tight text-zinc-900">
             {name}
         </h2>
-        <p class="my-1 text-1xl font-normal tracking-tight text-stone-700">${price.toFixed(3)}</p>
+        <p class="my-1 text-1xl font-semibold tracking-tight text-[#9c6550]">${price.toFixed(3)}</p>
 
-        <p class="font-extralight text-gray-500 text-sm">
+        <p class="font-extralight text-gray-800 text-sm">
             {description?.length > 110 ? description.slice(0, 110) + '...' : description}
         </p>
         <div class="mt-1">

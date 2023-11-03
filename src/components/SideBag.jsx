@@ -10,6 +10,24 @@ const SideBar = () => {
     const $isCartOpen = useStore(isCartOpen);
     const $APIMakeups = useStore(APIMakeups);
 
+    function deleteProduct(id){
+
+        const storedCartItems = localStorage.getItem('cartItems');
+
+        if(storedCartItems){
+            const cartItems = JSON.parse(storedCartItems);
+            delete cartItems[id];
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        }
+
+        const updatedMakeups = { ...$APIMakeups };
+        delete updatedMakeups[id];
+        APIMakeups.set(updatedMakeups);
+
+        const productAddedKey = `product_${id}_added`;
+        localStorage.setItem(productAddedKey, "false");
+    }
+
     useEffect(() => {
         // Carga los productos almacenados en el localStorage
         const storedCartItems = localStorage.getItem('cartItems');
@@ -23,6 +41,7 @@ const SideBar = () => {
     
     return(
         <div className='bg-transparent py-8 flex top-0 right-0'>
+            <div className='text-[#955c46]'>
             <button className='mr-4' onClick={() => setOpen(true)}>
                 <svg className='svg-size' xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -30,15 +49,15 @@ const SideBar = () => {
                     <path d="M9 11v-5a3 3 0 0 1 6 0v5"></path>
                 </svg>
             </button>
-
+            </div>
             <div className={`${!open && "hidden"} bg-stone-300/50 min-h-screen w-full fixed top-0 right-0 backdrop-blur-sm`} onClick={() => setOpen(false)} >
             </div>
 
             <div className={ `${open ? "w-[420px]" : "w-[1px]"} bg-white min-h-screen w-[420px] fixed top-0 right-0 transition-all duration-500 shadow`}>
                     <div className={`${!open && "hidden"} flex items-center justify-between py-4 px-5 border-b`}>
 
-                            <h3 className='text-2xl flex gap-4 items-center font-bold text-zinc-800'>Tu bolsa</h3>
-                            <button className='text-black' onClick={() => setOpen(false)}>
+                            <h3 className='text-2xl flex gap-4 items-center font-bold text-black'>Tu bolsa</h3>
+                            <button className='text-gray-500' onClick={() => setOpen(false)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <path d="M18 6l-12 12"></path>
@@ -53,7 +72,7 @@ const SideBar = () => {
                                     {Object.values($APIMakeups).map(makeup => (
                                         <li key={makeup.id} className='grid py-4 grid-cols-12 gap-3'>
                                             <div className='overflow-hidden rounded-md col-span-3 lg:col-span-2'>
-                                                <img src={makeup.image} alt={makeup.name} className='object-cover h-full object-center aspect-1'/>
+                                                <img src={makeup.image} alt={makeup.name} className='h-auto object-center aspect-1'/>
                                             </div>
                                             <div className='col-span-7 lg:col-span-8 flex flex-col'>
                                                 <h3 className='w-fit text-base font-semibold'>{makeup.name}</h3>
@@ -65,8 +84,8 @@ const SideBar = () => {
                                             </div>
                                             <div className='col-span-2 items-center flex justify-between flex-col ml-2'>
                                                 
-                                                <div className="pt-4 text-zinc-500">
-                                                    <button>
+                                                <div className="pt-4 text-[#955c46]">
+                                                    <button onClick={() => deleteProduct(makeup.id)}>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" strokeWidth="1.4" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                                             <path d="M4 7l16 0"></path>
@@ -81,7 +100,7 @@ const SideBar = () => {
                                         </li>
                                     ))}
                                 </ul>
-                            ): <div> <p className="text-center pt-10 m-auto text-zinc-700 text-base">Tu bolsa está vacía</p> <a className={`${!open && "hidden"}`} onClick={() => setOpen(false)} href="/"><p className="text-center text-cyan-900 font-semibold">Agregar productos a mi bolsa</p></a></div>
+                            ): <div> <p className="text-center pt-10 m-auto text-zinc-700 text-base">Tu bolsa está vacía</p> <a className={`${!open && "hidden"}`} onClick={() => setOpen(false)} href="/"><p className="text-center text-[#955c46] font-semibold">Agregar productos a mi bolsa</p></a></div>
                         }
                     </div>
                     
