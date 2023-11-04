@@ -10,6 +10,16 @@ const SideBar = () => {
     const $isCartOpen = useStore(isCartOpen);
     const $APIMakeups = useStore(APIMakeups);
 
+    function openSideBar() {
+        document.body.classList.add("no-scroll");
+        // Otras operaciones para abrir la bolsa
+    }
+
+    function closeSideBar() {
+        document.body.classList.remove("no-scroll");
+        // Otras operaciones para cerrar la bolsa
+    }
+
     function deleteProduct(id){
 
         const storedCartItems = localStorage.getItem('cartItems');
@@ -45,7 +55,11 @@ const SideBar = () => {
     return(
         <div className='bg-transparent py-8 flex top-0 right-0'>
             <div className='text-[#955c46]'>
-            <button className='mr-4' onClick={() => setOpen(true)}>
+            <button className='mr-4' onClick={() => {
+                setOpen(true)
+                openSideBar()
+                
+                }}>
                 <svg className='svg-size' xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z"></path>
@@ -53,14 +67,20 @@ const SideBar = () => {
                 </svg>
             </button>
             </div>
-            <div className={`${!open && "hidden"} bg-stone-300/50 min-h-screen w-full fixed top-0 right-0 backdrop-blur-sm`} onClick={() => setOpen(false)} >
+            <div className={`${!open && "hidden"} bg-stone-300/50 min-h-screen w-full fixed top-0 right-0 backdrop-blur-sm`} onClick={() => {
+                setOpen(false)
+                closeSideBar()
+                }} >
             </div>
 
-            <div className={ `${open ? "w-[420px]" : "w-[0.5px]"} bg-white min-h-screen w-[420px] fixed top-0 right-0 transition-all duration-500 shadow`}>
+            <div className={ `${open ? "w-[420px]" : "w-[0.2px]"} bg-white min-h-screen w-[420px] fixed top-0 right-0 transition-all duration-500 shadow`}>
                     <div className={`${!open && "hidden"} flex items-center justify-between py-4 px-5 border-b`}>
 
                             <h3 className='text-2xl flex gap-4 items-center font-bold text-black'>Tu bolsa</h3>
-                            <button className='text-gray-500' onClick={() => setOpen(false)}>
+                            <button className='text-gray-500' onClick={() => {
+                                setOpen(false)
+                                closeSideBar()
+                                }}>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <path d="M18 6l-12 12"></path>

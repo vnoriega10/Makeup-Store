@@ -45,7 +45,7 @@ export default function AddToBagForm({ id }) {
                     {addedToCart && <p className="text-xs py-2 px-1 text-red-600">El producto ya existe en la bolsa</p>}
                 </div>
             </form>
-            <ToastContainer position="top-right" toastStyle={{color: "black"}} style={{marginTop: "113px"}} autoClose={2000} />
+            <ToastContainer position="top-right" toastStyle={{color: "black"}} style={{marginTop: "150px"}} autoClose={900} />
         </div>
     )
 
