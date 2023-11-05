@@ -29,8 +29,10 @@ export default function AddToBagForm({ id }) {
             setAddedToCart(true);
 
             localStorage.setItem(`product_${id}_added`, "true");
+            window.location.reload();
 
             toast.success("Producto agregado a tu bolsa")
+            
         } catch (error) {
             console.error("error al obtener los datos");
         }

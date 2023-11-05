@@ -13,3 +13,22 @@
     background-color: #060606; /* Cambia el color de fondo a verde */
     color: #d01a1a; /* Cambia el color del texto a blanco */
 }
+
+.products-container {
+    min-height: 64vh;
+    max-height: 64vh; /* Ajusta la altura máxima según tus necesidades */
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.cart-item-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgb(227, 44, 44);
+    color: white;
+    border-radius: 50%;
+    padding: 0 7px;
+    font-size: 11px;
+}
+  

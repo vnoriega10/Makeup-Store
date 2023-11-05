@@ -4,12 +4,12 @@ import { atom, map} from 'nanostores';
 export const isCartOpen = atom(false);
 
 
-export type CartItemDisplayInfo = Pick<APIMakeup, 'id' | 'name' | 'price' | 'image'>;
+export type CartItemDisplayInfo = Pick<APIMakeup, 'id' | 'name' | 'price' | 'image' >;
 
 export const APIMakeups = map<Record<string, APIMakeup>>({});
 
 
-export function addCartItem ({id, name, price, image}) {
+export function addCartItem ({id, name, price, image, quantity = 1}) {
   
     const item = {
         id,
@@ -18,6 +18,7 @@ export function addCartItem ({id, name, price, image}) {
         image,
         description: "",
         status: "",
+        quantity
     };
     
     // Guarda el producto en el almacenamiento local
