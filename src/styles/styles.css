@@ -15,8 +15,8 @@
 }
 
 .products-container {
-    min-height: 64vh;
-    max-height: 64vh; /* Ajusta la altura máxima según tus necesidades */
+    min-height: 40vh;
+    max-height: 40vh; /* Ajusta la altura máxima según tus necesidades */
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -28,7 +28,7 @@
     background-color: rgb(227, 44, 44);
     color: white;
     border-radius: 50%;
-    padding: 0 5px;
-    font-size: 11px;
+    padding: 2px 7px;
+    font-size: 9px;
 }
   

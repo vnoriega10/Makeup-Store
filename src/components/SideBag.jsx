@@ -1,16 +1,45 @@
 import {useState, useEffect} from'react'
 import '../styles/styles.css'
-import { Contador } from './Contador'
 import { useStore } from '@nanostores/react'
-import { isCartOpen, APIMakeups} from '../services/cartStore'
+import {APIMakeups} from '../services/cartStore'
 
 const SideBar = () => {
     
-    const [open, setOpen] = useState(false)
-    const $isCartOpen = useStore(isCartOpen);
+    const [open, setOpen] = useState(false);
     const $APIMakeups = useStore(APIMakeups);
     const hasItems = Object.values($APIMakeups).length > 0;
     const [cartItemCount, setCartItemCount] = useState(0);
+
+    const [formData, setFormData] = useState({
+        name: '',
+        tel: '',
+        city: '',
+        address: ''
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+          ...formData,
+          [name]: value,
+        });
+    };
+
+    const handleFormSubmit = () => {
+        const { name, tel, city, address } = formData;
+    
+        // Construye el mensaje de WhatsApp con información del carrito
+        const cartItems = Object.values($APIMakeups);
+        let message = `Nombre: ${name}\nTeléfono: ${tel}\nCiudad: ${city}\nDirección: ${address}\n\nProductos en el carrito:\n\nTotal:\n`;
+        cartItems.forEach((makeup) => {
+            message += `${makeup.name}: ${makeup.quantity}\n ${makeup.price.toFixed(3)}\n`;
+        });
+    
+        const whatsappURL = `https://wa.me/573006046165?text=${encodeURIComponent(message)}`;
+        
+        // Abre la ventana de WhatsApp utilizando 'wa.me'
+        window.open(whatsappURL, '_blank');
+    };
 
     function formatNumberWithSeparator(value) {
         return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
@@ -24,11 +53,11 @@ const SideBar = () => {
         const storedCartItems = localStorage.getItem('cartItems');
         if (storedCartItems) {
           const cartItems = JSON.parse(storedCartItems);
-          const itemCount = Object.values(cartItems).reduce((acc, item) => acc + 1, 0);
+          const itemCount = Object.values(cartItems).reduce((acc) => acc + 1, 0);
           setCartItemCount(itemCount);
         }
     }, []);
-      
+
 
     function openSideBar() {
         document.body.classList.add("no-scroll");
@@ -171,23 +200,53 @@ const SideBar = () => {
                             </div>         
                         )}
                         {hasItems && (
-                            <div className="">
-                                <div className='border-t border-zinc-300 py-3 sm:px-4'>
-                                    <div className='flex justify-between py-2 text-base text-zinc-900'>
-                                        <span className='font-semibold'>Subtotal</span>
-                                        <span className=''>$ {formatNumberWithThreeDecimals(Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0))}</span>
-                                    
-                                    </div>
-                                    <div className='flex justify-between  py-2 text-base text-zinc-900'>
-                                        <span className='font-semibold'>Envío</span>
-                                        <span className=''>Por calcular</span>
-                                    </div>
-                                    <div className='flex justify-between  py-2 text-base text-zinc-900'>
-                                        <span className='font-semibold'>Total</span>
-                                        <span className=''>$ {formatNumberWithThreeDecimals(Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0))}</span>
-                                    </div>
-                                    <div className="flex justify-center py-2">
-                                    <a href="/checkout" className='w-full'><button hx-post="" className='bg-[#9c6550] text-white py-3 px-2 w-full rounded-md hover:scale-105 hover:bg-[#b17863] transition'>Comprar ahora</button></a>
+                            <div>
+                                
+                                
+                                <div className="">
+                                    <div className='border-t border-zinc-300 py-3 sm:px-4'>
+                                        <div className='flex justify-between py-2 text-base text-zinc-900'>
+                                            <span className='font-semibold'>Subtotal</span>
+                                            <span className=''>$ {formatNumberWithThreeDecimals(Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0))}</span>
+                                        
+                                        </div>
+                                        <div className='flex justify-between  py-2 text-base text-zinc-900'>
+                                            <span className='font-semibold'>Envío</span>
+                                            <span className=''>Por calcular</span>
+                                        </div>
+                                        <div className='flex justify-between  py-2 text-base text-zinc-900'>
+                                            <span className='font-semibold'>Total</span>
+                                            <span className=''>$ {formatNumberWithThreeDecimals(Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0))}</span>
+                                        </div>
+                                        <div class=" text-center text-zinc-900 font-bold text-xl py-1">
+                                            <h1>Información de facturación</h1>
+                                        </div>
+                                        <div class="w-full">
+                                            <form id="myForm" class="bg-transparent shadow-sm rounded-md px-3 py-1">
+                                                <div class="grid md:grid-cols-2 md:gap-3" >
+                                                    <div >
+                                                        <label for="name" class="text-zinc-900 text-sm font-semibold block mb-1">Nombre completo</label>
+                                                        <input name="name" id="name" minlength="1" maxlength="25" class="appearance-none border border-zinc-300 rounded w-full py-1 px-3 leading-tight focus:outline-none focus:shadow-none" value={formData.name} onChange={handleInputChange} type="text" required/>
+                                                    </div>
+                                                    <div>
+                                                        <label for="tel" class="text-zinc-900 text-sm font-semibold block mb-1">Número de teléfono</label>
+                                                        <input name="tel" id="tel" class="appearance-none border border-zinc-300 rounded w-full py-1 px-3 leading-tight focus:outline-none focus:shadow-none" type="tel" pattern="[0-9]{3}[0-9]{3}[0-9]{4}" minlength="1" maxlength="10" value={formData.tel} onChange={handleInputChange} required/>
+                                                    </div>
+                                                    <div >
+                                                        <label for="city" class="text-zinc-900 text-sm font-semibold block mb-1">Ciudad</label>
+                                                        <input name="city" id="city" minlength="1" maxlength="25" class="appearance-none border border-zinc-300 rounded w-full py-1 px-3 leading-tight focus:outline-none focus:shadow-none" type="text" value={formData.city} onChange={handleInputChange} required/>
+                                                    </div>
+                                                    <div class="mb-4">
+                                                        <label for="address" class="text-zinc-900 text-sm font-semibold block mb-1">Dirección</label>
+                                                        <input name="address" id="address" class="appearance-none border border-zinc-300 rounded w-full py-1 px-3 leading-tight focus:outline-none focus:shadow-none" type="text" required value={formData.address} onChange={handleInputChange}/>
+                                                    </div>
+                                                </div>
+                                                <button onClick={handleFormSubmit} type="button" id="submitButton" class="bg-[#9c6550] text-white py-2 w-full rounded-md hover:scale-105 hover:bg-[#b17863] transitio">Confirmar compra</button>
+                                                
+                                            </form>
+                                            
+                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -204,9 +263,14 @@ const SideBar = () => {
                     </div>
                 </div> 
             </div>
-        </div>   
+        </div>
+        
+        
+        
     )
 }
+
+
 
 export default SideBar
 
