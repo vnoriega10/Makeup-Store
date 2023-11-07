@@ -12,6 +12,14 @@ const SideBar = () => {
     const hasItems = Object.values($APIMakeups).length > 0;
     const [cartItemCount, setCartItemCount] = useState(0);
 
+    function formatNumberWithSeparator(value) {
+        return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function formatNumberWithThreeDecimals(value) {
+        return formatNumberWithSeparator(value.toFixed(3));
+    }
+
     useEffect(() => {
         const storedCartItems = localStorage.getItem('cartItems');
         if (storedCartItems) {
@@ -105,7 +113,7 @@ const SideBar = () => {
                 }} >
             </div>
 
-            <div className={ `${open ? "w-[420px]" : "w-[0]"} bg-white min-h-full max-h-screen w-[420px] fixed top-0 right-0 transition-all duration-500 shadow`}>
+            <div className={ `${open ? "w-[420px]" : "w-[1px]"} bg-white min-h-full max-h-screen w-[420px] fixed top-0 right-0 transition-all duration-500 shadow`}>
                     <div className={`${!open && "hidden"} flex items-center justify-between py-4 px-5 border-b`}>
 
                             <h3 className='text-2xl flex gap-4 items-center font-bold text-black'>Tu bolsa</h3>
@@ -155,7 +163,7 @@ const SideBar = () => {
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                <span className='text-sm px-2'>${(makeup.price * makeup.quantity).toFixed(3)}</span>
+                                                <span className='text-sm px-2'>${formatNumberWithThreeDecimals(makeup.price * makeup.quantity)}</span>
                                             </div>
                                         </li>      
                                     ))}
@@ -167,7 +175,7 @@ const SideBar = () => {
                                 <div className='border-t border-zinc-300 py-3 sm:px-4'>
                                     <div className='flex justify-between py-2 text-base text-zinc-900'>
                                         <span className='font-semibold'>Subtotal</span>
-                                        <span className=''>${Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0).toFixed(3)}</span>
+                                        <span className=''>$ {formatNumberWithThreeDecimals(Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0))}</span>
                                     
                                     </div>
                                     <div className='flex justify-between  py-2 text-base text-zinc-900'>
@@ -176,10 +184,10 @@ const SideBar = () => {
                                     </div>
                                     <div className='flex justify-between  py-2 text-base text-zinc-900'>
                                         <span className='font-semibold'>Total</span>
-                                        <span className=''>${Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0).toFixed(3)}</span>
+                                        <span className=''>$ {formatNumberWithThreeDecimals(Object.values($APIMakeups).reduce((acc, makeup) => acc + (makeup.price * makeup.quantity), 0))}</span>
                                     </div>
                                     <div className="flex justify-center py-2">
-                                        <button className='bg-[#9c6550] text-white py-3 px-2 rounded-md w-full hover:scale-105 hover:bg-[#b17863] transition'>Comprar ahora</button>
+                                    <a href="/checkout" className='w-full'><button hx-post="" className='bg-[#9c6550] text-white py-3 px-2 w-full rounded-md hover:scale-105 hover:bg-[#b17863] transition'>Comprar ahora</button></a>
                                     </div>
                                 </div>
                             </div>
