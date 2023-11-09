@@ -21,6 +21,24 @@
     overflow-x: hidden;
 }
 
+@media (max-height:740px) {
+    .products-container {
+        min-height: 30vh;
+        max-height: 30vh; /* Ajusta la altura máxima según tus necesidades */
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
+@media (max-height:740px ) {
+    .products-container {
+        min-height: 30vh;
+        max-height: 30vh; /* Ajusta la altura máxima según tus necesidades */
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+}
+
 .cart-item-count {
     position: absolute;
     top: 0;
