@@ -183,9 +183,9 @@ const SideBar = () => {
                                                     <div className="flex text-sm pt-5">
                                                         <span className=" mr-1">Cantidad: </span> 
                                                         <div className="flex text-center items-center">
-                                                            <button className="border border-zinc-400 pb-1 text-sm w-5 h-5 max-[450px]:w-4 max-[450px]:h-4 max-[450px]:pb-0 flex justify-center items-center" onClick={() => updateQuantity(makeup.id, makeup.quantity - 1)}>-</button>
+                                                            <button className="border border-zinc-400 text-sm w-5 h-5 max-[450px]:w-4 max-[450px]:h-4 max-[450px]:pb-0 flex justify-center items-center" onClick={() => updateQuantity(makeup.id, makeup.quantity - 1)}>-</button>
                                                             <span className="text-zinc-800 text-sm px-2 font-semibold mt-[1px] max-[450px]:mt-0">{makeup.quantity}</span>
-                                                            <button className="border border-zinc-400 pb-1 text-sm w-5 h-5 max-[450px]:w-4 max-[450px]:h-4 max-[450px]:pb-0 justify-center flex items-center" onClick={() => updateQuantity(makeup.id, makeup.quantity + 1)}>+</button>
+                                                            <button className="border border-zinc-400 text-sm w-5 h-5 max-[450px]:w-4 max-[450px]:h-4 max-[450px]:pb-0 justify-center flex items-center" onClick={() => updateQuantity(makeup.id, makeup.quantity + 1)}>+</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -244,7 +244,7 @@ const SideBar = () => {
                                                             </svg>
                                                             <label for="name" class="text-zinc-900 text-sm px-1 mb-1">Nombre completo</label>
                                                         </div>
-                                                        <input name="name" id="name" minlength="1" maxlength="25" class="appearance-none border border-zinc-300 rounded w-full py-1 max-[450px]:py-0 mb-1 px-3 leading-tight focus:outline-none focus:shadow-none" value={formData.name} onChange={handleInputChange} type="text" required/>
+                                                        <input name="name" id="name" minlength="1" maxlength="25" class=" max-[450px]:text-sm appearance-none border border-zinc-300 rounded w-full py-1 max-[450px]:py-0 mb-1 px-3 leading-tight focus:outline-none focus:shadow-none" value={formData.name} onChange={handleInputChange} type="text" required/>
                                                     </div>
                                                     <div>
                                                         <div className='flex text-[#955c46]'>
